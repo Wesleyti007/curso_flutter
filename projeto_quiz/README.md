@@ -1,6 +1,6 @@
 # projeto_quiz
 
-A new Flutter project.
+Projeto para fins de aprendizado/conhecimento sobre Flutter
 
 ## Getting Started
 
