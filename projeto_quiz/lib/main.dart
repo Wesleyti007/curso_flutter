@@ -1,13 +1,19 @@
-
 import 'package:flutter/material.dart';
+import './question.dart';
 
 main() {
   runApp(QuestionApp());
 }
 
-class QuestionApp extends StatelessWidget {
+class _QuestionAppState extends State<QuestionApp> {
+ var _quizSelected = 0;
 
-  void answer() {
+ void _answer() {
+    
+  setState(() {
+    _quizSelected++;
+  });
+
     print('Pergunta respondida');
   }
 
@@ -25,23 +31,30 @@ class QuestionApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text(quiz[0]),
+            Question(quiz[_quizSelected]),
             RaisedButton(
               child: Text('Resposta 1'),
-              onPressed: answer,
+              onPressed: _answer,
             ),
             RaisedButton(
               child: Text('Resposta 2'),
-              onPressed: answer,
+              onPressed: _answer,
             ),
             RaisedButton(
               child: Text('Resposta 3'),
-              onPressed: answer,
+              onPressed: _answer,
             )
           ],
           
         ),
       ),
     );
+  }
+}
+
+class QuestionApp extends StatefulWidget {
+ 
+ _QuestionAppState createState() {
+    return new _QuestionAppState();
   }
 }
