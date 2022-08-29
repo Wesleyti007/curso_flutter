@@ -1,28 +1,45 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 main() {
   runApp(QuestionApp());
 }
 
 class _QuestionAppState extends State<QuestionApp> {
- var _quizSelected = 0;
+  var _quizSelected = 0;
 
- void _answer() {
-    
-  setState(() {
-    _quizSelected++;
-  });
+  void _answer() {
+    setState(() {
+      _quizSelected++;
+    });
 
     print('Pergunta respondida');
   }
 
   @override
-  Widget build(BuildContext context){
-    final List<String> quiz = [
-      'Qual é a sua cor favorita ?',
-      'Qual o seu animal favorito ?'
+  Widget build(BuildContext context) {
+    final List<Map<String, Object>> quiz = [
+      {
+        'text': 'Qual é a sua cor favorita ?',
+        'answer': ['Azul', 'Vermelho', 'Verde', 'Branco'],
+      },
+      {
+        'text': 'Qual o seu animal favorito ?',
+        'answer': ['Coelho', 'Elefante', 'Leao', 'Cobra'],
+      },
+      {
+        'text': 'Qual o seu instrutor favorito ?',
+        'answer': ['Maria', 'Joao', 'Leo', 'Ana'],
+      }
     ];
+
+    List<Widget> answer = [];
+
+    for(String textAnswer in quiz[_quizSelected].cast() ['answer']) {
+      print(textAnswer);
+      answer.addAll(<Widget>[Answer(textAnswer, _answer)]);
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -30,22 +47,10 @@ class _QuestionAppState extends State<QuestionApp> {
           title: Text('Quiz'),
         ),
         body: Column(
-          children: [
-            Question(quiz[_quizSelected]),
-            RaisedButton(
-              child: Text('Resposta 1'),
-              onPressed: _answer,
-            ),
-            RaisedButton(
-              child: Text('Resposta 2'),
-              onPressed: _answer,
-            ),
-            RaisedButton(
-              child: Text('Resposta 3'),
-              onPressed: _answer,
-            )
+          children: <Widget> [
+            Question(quiz[_quizSelected]['text'].toString()),
+           ...answer,
           ],
-          
         ),
       ),
     );
@@ -53,8 +58,7 @@ class _QuestionAppState extends State<QuestionApp> {
 }
 
 class QuestionApp extends StatefulWidget {
- 
- _QuestionAppState createState() {
+  _QuestionAppState createState() {
     return new _QuestionAppState();
   }
 }
