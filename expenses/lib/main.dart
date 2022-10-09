@@ -52,9 +52,36 @@ Widget build(BuildContext context){
         elevation: 5,
       ),
     ),
-    Card(
-      child: Text('Lista de transações'),
-    )
+    Column
+    (
+      children:_transaction.map((tr) {
+        return Card(
+          child: Row(children: [
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 10
+              ),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  width: 2,
+                )),
+                padding: EdgeInsets.all(10),
+              child: Text(tr.value.toString()),
+            ),
+            Column(
+              children: [
+                Text(tr.title),
+                Text(tr.date.toString())
+              ],
+            )
+          ]),
+        );
+
+      }).toList(),
+      
+    ),
 
    ]),
   );
